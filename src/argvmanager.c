@@ -7,8 +7,8 @@ void argvmanager_init(int number_of_mandatory_args, int number_of_optional_args,
 	optional_args_list = NULL;
 	mandatory_args_list = NULL;
 
-	optional_args_list = calloc(number_of_optional_args, sizeof(optional_cl_argument));
-	mandatory_args_list = calloc(number_of_mandatory_args, sizeof(mandatory_cl_argument));
+	optional_args_list = (optional_cl_argument * )calloc(number_of_optional_args, sizeof(optional_cl_argument));
+	mandatory_args_list = (mandatory_cl_argument * )calloc(number_of_mandatory_args, sizeof(mandatory_cl_argument));
 
 	argv_copy = argv;
 	argc_copy = argc;
@@ -18,7 +18,7 @@ void argvmanager_init(int number_of_mandatory_args, int number_of_optional_args,
 int add_optional_argument(const char* flag, const char* extended, const char* help)
 {
 	//printf("Created optional argument \'%s\' [extended version: \'%s\']\n", flag, extended);
-	
+
 	optional_cl_argument new_optional_arg = {flag, extended, help};
 
 	append_to_oargs(new_optional_arg);
@@ -45,11 +45,11 @@ int append_to_oargs(optional_cl_argument argument)
 	{
 		if(optional_args_list[x].flag==NULL)
     	{
-    		//printf("Assigned optional %x to optional_args_list[%i](%x)\n", &argument, index, &optional_args_list[x]);
     		optional_args_list[x] = argument;
     		return 1;
     	}
     }
+    return 0;
 }
 
 int append_to_margs(mandatory_cl_argument argument)
@@ -58,17 +58,17 @@ int append_to_margs(mandatory_cl_argument argument)
 	{
 		if(mandatory_args_list[x].flag==NULL)
     	{
-    		//printf("Assigned mandatory %x to mandatory_args_list[%i](%x)\n", &argument, index, &mandatory_args_list[x]);
     		mandatory_args_list[x] = argument;
     		return 1;
     	}
     }
+    return 0;
 }
 
 
 int check_flag(const char* flag_to_check)
 {
-	for(int x=0; x<argc_copy; x++)
+	for(int x=0; x<optional_args_count-1; x++)
 	{
 		if((strcmp(optional_args_list[x].flag, flag_to_check)==0) || strcmp(optional_args_list[x].extended, flag_to_check)==0)
 		{ //check if the flag to be searched exists in the flags array
@@ -90,7 +90,7 @@ void get_all_args()
 {
 	printf("Mandatory arguments: ");
 	if(mandatory_args_count==0)
-	{  printf("None\n");  }
+		{  printf("None\n");  }
 	else
 	{
 		printf("\n");
@@ -104,11 +104,16 @@ void get_all_args()
 	}
 
 	printf("Optional arguments:\n");
-	for(int index=0; index<optional_args_count; index++)
+	if(optional_args_count==0)
+		{  printf("None\n");  }
+	else
 	{
-		if(optional_args_list[index].flag!=NULL)
+		for(int index=0; index<optional_args_count; index++)
 		{
-			printf("[%i] #%i (Flag: %s, Expanded: %s)\n", index, index+1, optional_args_list[index].flag, optional_args_list[index].extended);
+			if(optional_args_list[index].flag!=NULL)
+			{
+				printf("[%i] #%i (Flag: %s, Expanded: %s)\n", index, index+1, optional_args_list[index].flag, optional_args_list[index].extended);
+			}
 		}
 	}
 }
@@ -127,16 +132,20 @@ void help_flag()
 				printf(" <%s> ", mandatory_args_list[x].flag);
 			}
 		}
+		printf("\n");
 
-
-		printf("\nOptional arguments:\n");
-		for(int x=0; x<optional_args_count; x++)
+		if(optional_args_count>0)
 		{
-			if(optional_args_list[x].flag!=NULL)
+			printf("\nOptional arguments:\n");
+			for(int x=0; x<optional_args_count; x++)
 			{
-			printf(" %s, %s <value>   %s\n", optional_args_list[x].flag, optional_args_list[x].extended, optional_args_list[x].help);
+				if(optional_args_list[x].flag!=NULL)
+				{
+				printf(" %s, %s %s\n", optional_args_list[x].flag, optional_args_list[x].extended, optional_args_list[x].help);
+				}
 			}
 		}
 		printf("\n");
+		exit(0);
 	}
 }

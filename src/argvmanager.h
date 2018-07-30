@@ -4,15 +4,15 @@
 
 typedef struct o_clarg
 {
-	char* flag;
-	char* extended;
-	char* help;
+	const char* flag;
+	const char* extended;
+	const char* help;
 } optional_cl_argument;
 
 typedef struct m_clarg
 {
-	char* flag;
-	char* help;
+	const char* flag;
+	const char* help;
 } mandatory_cl_argument;
 
 static optional_cl_argument *optional_args_list;
