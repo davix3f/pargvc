@@ -10,6 +10,13 @@ compilesrc: $(SOURCES)
 	@$(CC) -Wall $(SOURCES)
 	@echo "\n----------------\nCompilation terminated\n----------------\n"
 
+compile-nowall: $(SOURCES)
+	@echo "Compiling those sources.. $(SOURCES)"
+	@echo "Headers: $(HEADERS)"
+	@$(CC) $(SOURCES)
+	@echo "\n----------------\nCompilation terminated\n----------------\n"
+
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< $(PKGCONF)
 
