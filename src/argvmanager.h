@@ -24,6 +24,7 @@ static int mandatory_args_count;
 
 //Launch this with argc as argument before anything else
 void argvmanager_init(int number_of_mandatory_args, int number_of_optional_args, char** argv, int argc);
+void argvmanager_end();
 
 int add_optional_argument(const char* flag, const char* extended, const char* help);
 int add_mandatory_argument(const char* flag, const char* help);

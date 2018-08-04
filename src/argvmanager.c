@@ -14,6 +14,12 @@ void argvmanager_init(int number_of_mandatory_args, int number_of_optional_args,
 	argc_copy = argc;
 }
 
+void argvmanager_end()
+{
+	free(optional_args_list);
+	free(mandatory_args_list);
+}
+
 
 int add_optional_argument(const char* flag, const char* extended, const char* help)
 {
