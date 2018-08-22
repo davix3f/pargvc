@@ -51,8 +51,8 @@ int check_flag(const char* flag_to_check);
 
 //print all args
 void get_all_args();
-
-void help_flag(); // execute this function at the end of the arguments declaration or of the whole script
+const char* get_arg_value(const char* arg_name);
+int help_flag(); // execute this function at the end of the arguments declaration or of the whole script
 /*
 add_mandatory_argument(this this)
 add_optional_argument(this this this)

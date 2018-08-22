@@ -33,33 +33,35 @@ void get_all_args()
 }
 
 
-void help_flag()
+const char* get_arg_value(const char* arg_name)
 {
-	if((argc_copy==2) && ((strcmp("-h", argv_copy[1])==0 || (strcmp("--help", argv_copy[1])==0))))
+	for(int x=0; x<argc_copy; x++)
 	{
-		printf("Usage: %s ", argv_copy[0]);
+		if(input_args[x].name == NULL){ break; }
 
-		for(int x=0; x<mandatory_args_count; x++)
+		if(strcmp(input_args[x].name, arg_name)==0)
 		{
-			if(mandatory_args_list[x].flag!=NULL)
-			{
-				printf(" <%s> ", mandatory_args_list[x].flag);
-			}
+			return(input_args[x].value);
 		}
-		printf("\n");
+	}
+	return("NO_VAL");
+}
 
-		if(optional_args_count>0)
-		{
-			printf("\nOptional arguments:\n");
-			for(int x=0; x<optional_args_count; x++)
-			{
-				if(optional_args_list[x].flag!=NULL)
+int check_flag(const char* flag_to_check)
+{
+	for(int x=0; x<optional_args_count-1; x++)
+	{
+		if(strcmp(optional_args_list[x].flag, flag_to_check)==0 || strcmp(optional_args_list[x].extended, flag_to_check)==0)
+		{ //check if the flag to be searched exists in the flags array
+		  //if it exists
+			for(int index=0; index<argc_copy; index++)
+			{ // argv is parsed to look for it
+				if(strcmp(optional_args_list[x].flag, argv_copy[index])==0 || strcmp(optional_args_list[x].extended, argv_copy[index])==0)
 				{
-				printf(" %s, %s %s\n", optional_args_list[x].flag, optional_args_list[x].extended, optional_args_list[x].help);
+					return 1;
 				}
 			}
 		}
-		printf("\n");
-		exit(0);
 	}
+	return 0;
 }

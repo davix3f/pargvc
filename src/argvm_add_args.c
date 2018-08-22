@@ -58,6 +58,7 @@ int add_input_value(const char* flag, const char* input_val)
     	{
 			argv_value arg = {flag, input_val};
     		input_args[x] = arg;
+			//printf("added %s with val %s\n", arg.name, arg.value);
     		return 1;
     	}
     }
