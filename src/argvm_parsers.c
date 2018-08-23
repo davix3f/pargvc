@@ -41,40 +41,44 @@ void parse_argv()
 		_Bool found = 0;
 		for(int x=1; x<argc_copy; x++)
 		{
-			found = 0;
-			printf("Parsing %s: ", argv_copy[x]);
-			for(int y=0; y<optional_args_count; y++)
+			if(argv_copy[x][0] == '-')
 			{
-				//printf("Arg %i flag %s\n", y, optional_args_list[y].flag);
-				if(optional_args_list[y].flag != 0)
+				found = 0;
+				printf("Parsing %s: ", argv_copy[x]);
+				for(int y=0; y<optional_args_count; y++)
 				{
-					if(strcmp(optional_args_list[y].flag, argv_copy[x])==0||strcmp(optional_args_list[y].extended, argv_copy[x])==0)
+					//printf("Arg %i flag %s\n", y, optional_args_list[y].flag);
+					if(optional_args_list[y].flag != 0)
 					{
-						found = 1;
-						if(optional_args_list[y].has_value == 1)
+						if(strcmp(optional_args_list[y].flag, argv_copy[x])==0||strcmp(optional_args_list[y].extended, argv_copy[x])==0)
 						{
-							if(argv_copy[x+1]==0){ printf("Requires a value!\n"); return; }
-							else if(argv_copy[x+1][0]=='-'){ printf("Value cannot be another flag!\n"); return; }
-							else
+							found = 1;
+							if(optional_args_list[y].has_value == 1)
 							{
-								printf("has value %s\n", argv_copy[x+1]);
-								add_input_value(argv_copy[x], argv_copy[x+1]);
-								x++;
-								break;
-							}
-						} else {printf("No value required\n"); break;}
+								if(argv_copy[x+1]==0){ printf("Requires a value!\n"); return; }
+								else if(argv_copy[x+1][0]=='-'){ printf("Value cannot be another flag!\n"); return; }
+								else
+								{
+									printf("has value %s\n", argv_copy[x+1]);
+									add_input_value(argv_copy[x], argv_copy[x+1]);
+									x++;
+									break;
+								}
+							} else {printf("No value required\n"); break;}
+						}
 					}
-				}
-			}
-		} if(found==0){ printf("not existing!\n"); return; }
+				} if(found==0){ printf("not existing!\n"); return; }
+			} else { printf("Adding %s as argument for something\n", argv_copy[x]);
+				add_mandatory_value(argv_copy[x]);}
+		} 
 
-		for(int f=0; f<argc_copy; f++)
+		/*for(int f=0; f<argc_copy; f++)
 		{
 			if(input_args[f].name != 0)
 			{
 				printf("Flag %s: %s\n", input_args[f].name, input_args[f].value);
 				f++;
 			}
-		}
+		}*/
 	}
 }

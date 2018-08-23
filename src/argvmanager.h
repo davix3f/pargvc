@@ -36,7 +36,9 @@ void argvmanager_end();
 
 int add_optional_argument(const char* flag, const char* extended, _Bool has_value, const char* help);
 int add_mandatory_argument(const char* flag, const char* help);
+int add_mandatory_value(const char* input_val);
 int add_input_value(const char* flag, const char* input_val);
+
 
 int append_to_oargs(optional_cl_argument argument); // not for user
 int append_to_margs(mandatory_cl_argument argument); //not for user

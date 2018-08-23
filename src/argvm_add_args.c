@@ -64,3 +64,26 @@ int add_input_value(const char* flag, const char* input_val)
     }
 	return 0;
 }
+
+int add_mandatory_value(const char* input_val)
+{
+	int found = 0;
+	for(int x=0; x<mandatory_args_count; x++)
+	{
+		for(int y=0; y<argc_copy; y++)
+		{
+			if((input_args[y].name==mandatory_args_list[x].flag)==1)
+			{
+				found = 1;
+				break;
+			}
+		}
+		if(found == 0)
+		{
+			//printf("\nAdding val[%s] to marg[%s]\n", input_val, mandatory_args_list[x].flag);
+			add_input_value(mandatory_args_list[x].flag, input_val);
+			return 0;
+		}
+
+	} return 1;
+}
