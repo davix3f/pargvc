@@ -74,11 +74,18 @@ void parse_argv()
 						}
 					}
 				} if(found==0){ printf("not existing!\n"); return; } // if that flag has not been found
-			} else { append_mandatory_value(argv_copy[x]); }
-			  /*
-			  if the argv item is not a flag, it is added to
-			  the first not-assigned positional argument.
-			  */
+			}
+			else
+			{
+				if(mandatory_args_count == 0)
+				{
+					append_mandatory_value(argv_copy[x]);
+				    /*
+				    if the argv item is not a flag, it is added to
+				    the first not-assigned positional argument.
+				    */
+				} else { printf("%s ignored.\n", argv_copy[x]); }
+			}
 		}
 	}
 }
