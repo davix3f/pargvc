@@ -66,7 +66,7 @@ void parse_argv()
 								else
 								{
 									printf("has value %s\n", argv_copy[x+1]); // logging
-									add_input_value(argv_copy[x], argv_copy[x+1], 0); // assign that value
+									append_input_value(argv_copy[x], argv_copy[x+1], 0); // assign that value
 									x++;
 									break;
 								}
@@ -74,11 +74,11 @@ void parse_argv()
 						}
 					}
 				} if(found==0){ printf("not existing!\n"); return; } // if that flag has not been found
-			} else { add_mandatory_value(argv_copy[x]); }
+			} else { append_mandatory_value(argv_copy[x]); }
 			  /*
-			  if the argv item is not a flag, it is added to 
+			  if the argv item is not a flag, it is added to
 			  the first not-assigned positional argument.
 			  */
-		} 
+		}
 	}
 }

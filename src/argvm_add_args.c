@@ -67,7 +67,7 @@ int append_mandatory_value(const char* input_val)
 	int found = 0;
 	/*
 	checking if the input_args value
-	exists in mandatory args list   
+	exists in mandatory args list
 	*/
 	for(int x=0; x<mandatory_args_count; x++)
 	{
@@ -81,8 +81,8 @@ int append_mandatory_value(const char* input_val)
 		}
 		if(found == 0)
 		{
-			//printf("\nAdding val[%s] to marg[%s]\n", input_val, mandatory_args_list[x].flag);
-			add_input_value(mandatory_args_list[x].flag, input_val, 1);
+			printf("\nAdding val[%s] to marg[%s]\n", input_val, mandatory_args_list[x].flag);
+			append_input_value(mandatory_args_list[x].flag, input_val, 1);
 			return 0;
 		}
 
