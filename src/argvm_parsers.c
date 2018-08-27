@@ -47,7 +47,7 @@ void parse_argv()
 			if(argv_copy[x][0] == '-') // if the item starts with '-', it should be a flag
 			{
 				found = 0;
-				printf("Parsing %s: ", argv_copy[x]); // logging
+				//printf("Parsing %s: ", argv_copy[x]); // logging
 				for(int y=0; y<optional_args_count; y++) // for each item in optional_args_list
 				{
 					if(optional_args_list[y].flag != 0)
@@ -65,7 +65,7 @@ void parse_argv()
 								// if any of the above situations
 								else
 								{
-									printf("has value %s\n", argv_copy[x+1]); // logging
+									//printf("has value %s\n", argv_copy[x+1]); // logging
 									append_input_value(argv_copy[x], argv_copy[x+1], 0); // assign that value
 									x++;
 									break;
