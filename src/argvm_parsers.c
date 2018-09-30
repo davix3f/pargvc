@@ -77,14 +77,14 @@ void parse_argv()
 			}
 			else
 			{
-				if(mandatory_args_count == 0)
+				if(mandatory_args_count != 0)
 				{
 					append_mandatory_value(argv_copy[x]);
 				    /*
 				    if the argv item is not a flag, it is added to
 				    the first not-assigned positional argument.
 				    */
-				} else { printf("%s ignored.\n", argv_copy[x]); }
+				} else { printf("Value \'%s\' ignored\n", argv_copy[x]); }
 			}
 		}
 	}
