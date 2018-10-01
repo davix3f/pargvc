@@ -50,5 +50,6 @@ int main(int argc, char** argv)
     argvmanager_end();
     // Deallocate all the memory used
     // for arguments and argvmanager elements
-}```
+}
+```
 
