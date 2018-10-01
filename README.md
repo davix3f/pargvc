@@ -45,7 +45,7 @@ int main(int argc, char** argv)
     code
     code
     code
-    code/*
+    code*/
 
     argvmanager_end();
     // Deallocate all the memory used
