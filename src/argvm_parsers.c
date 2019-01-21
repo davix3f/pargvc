@@ -59,9 +59,9 @@ void parse_argv()
 							if(optional_args_list[y].has_value == 1) // if it requires a value
 							{
 								// but nothing after that flag is found
-								if(argv_copy[x+1]==0){ printf("Requires a value!\n"); return; } // error
+								if(argv_copy[x+1]==0){ printf("\'%s\' requires a value!\n", optional_args_list[y].flag); exit(1); } // error
 								// or the item next to it is another flag -> error
-								else if(argv_copy[x+1][0]=='-'){ printf("Value cannot be another flag!\n"); return; }
+								else if(argv_copy[x+1][0]=='-'){ printf("Value cannot be another flag!\n"); exit(1); }
 								// if any of the above situations
 								else
 								{
@@ -73,7 +73,7 @@ void parse_argv()
 							} else {printf("No value required\n"); break;} // if it does not require a value
 						}
 					}
-				} if(found==0){ printf("not existing!\n"); return; } // if that flag has not been found
+				} if(found==0){ printf("\'%s\' not existing!\n", argv_copy[x]); exit(1); } // if that flag has not been found
 			}
 			else
 			{
