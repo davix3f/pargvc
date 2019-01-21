@@ -63,9 +63,7 @@ int append_to_margs(mandatory_cl_argument argument)
 
 int append_input_value(const char* flag, const char* input_val, int is_mandatory_val)
 {
-	/*
-	This will assign <input_val> to <flag>, if it requires one
-	*/
+	//This will assign <input_val> to <flag>, if it requires one
 
 	//printf("flag:%s value:%s\n", flag, input_val);
 	for(int x=0; x<argc_copy; x++)
