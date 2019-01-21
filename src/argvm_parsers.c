@@ -88,4 +88,18 @@ void parse_argv()
 			}
 		}
 	}
+
+	for(int indx=0; indx<mandatory_args_count; indx++)
+	/*
+	parse mandatory_args_list and input_args
+	so if any is missing, an error is returned
+	*/
+	{
+		if(strcmp(get_arg_value(mandatory_args_list[indx].flag), "NO_VAL")==0)
+		{
+			printf("Mandatory value for '%s' missing!\n", mandatory_args_list[indx].flag);
+			exit(1);
+		}
+	}
+
 }
