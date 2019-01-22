@@ -6,13 +6,14 @@ typedef struct o_clarg
 {
 	const char* flag;
 	const char* extended;
-	_Bool has_value;
+	int  value_level;
 	const char* help;
 } optional_cl_argument;
 
 typedef struct m_clarg
 {
 	const char* flag;
+	int  value_level;
 	const char* help;
 } mandatory_cl_argument;
 
@@ -20,7 +21,7 @@ typedef struct i_arg
 {
 	const char* name;
 	const char* value;
-	int is_mandatory;
+	int is_accepted;
 } argv_value;
 
 optional_cl_argument *optional_args_list;
@@ -42,7 +43,7 @@ void argvmanager_end();
 // NOT FOR USER
 // These functions shouldn't be called by the user.
 int append_mandatory_value(const char* input_val); // not for user
-int append_input_value(const char* flag, const char* input_val, int is_mandatory); // not for user
+int append_input_value(const char* flag, const char* input_val, int is_accepted); // not for user
 int append_to_oargs(optional_cl_argument argument); // not for user
 int append_to_margs(mandatory_cl_argument argument); //not for user
 int help_flag();
@@ -50,8 +51,18 @@ int help_flag();
 // Frontends
 // FOR USER
 // Call those functions to interact with argv values
-int add_optional_argument(const char* flag, const char* extended, _Bool has_value, const char* help);
-int add_mandatory_argument(const char* flag, const char* help);
+
+int add_optional_argument(const char* flag, const char* extended, int value_level, const char* help);
+int add_mandatory_argument(const char* flag, int value_level, const char* help);
+/* value_level codes 
+ 0 -> value required
+ If the value is missing, an error will come up
+
+ 1 -> value optional
+ If given, the value is stored
+ If not, the value assigned to
+ that argument will be "TRUE"
+*/
 
 void parse_argv();
 
