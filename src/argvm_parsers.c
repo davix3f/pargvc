@@ -42,13 +42,16 @@ void parse_argv()
 	if(help_flag() == 1) // if --help or -h does not exists in argv
 	{
 		_Bool found = 0;
-		for(int x=1; x<argc_copy; x++) // for each item in argv
+		for(int x=1; x<argc_copy; x++)
+		// for each item in argv
 		{
-			if(argv_copy[x][0] == '-') // if the item starts with '-', it should be a flag
+			if(argv_copy[x][0] == '-')
+			// if the item starts with '-', it should be a flag
 			{
 				found = 0;
 				//printf("Parsing %s: ", argv_copy[x]); // logging
-				for(int y=0; y<optional_args_count; y++) // for each item in optional_args_list
+				for(int y=0; y<optional_args_count; y++)
+				// for each item in optional_args_list
 				{
 					if(optional_args_list[y].flag != 0)
 					{
@@ -56,13 +59,39 @@ void parse_argv()
 						if(strcmp(optional_args_list[y].flag, argv_copy[x])==0||strcmp(optional_args_list[y].extended, argv_copy[x])==0)
 						{
 							found = 1;
-							if(optional_args_list[y].has_value == 1) // if it requires a value
+							if(optional_args_list[y].value_level <= 1)
+							// if it accepts a value
 							{
 								// but nothing after that flag is found
-								if(argv_copy[x+1]==0){ printf("\'%s\' requires a value!\n", optional_args_list[y].flag); exit(1); } // error
-								// or the item next to it is another flag -> error
-								else if(argv_copy[x+1][0]=='-'){ printf("Value cannot be another flag!\n"); exit(1); }
-								// if any of the above situations
+								if(argv_copy[x+1] == 0)
+								{
+									if(optional_args_list[y].value_level == 0)
+									// if a value is REQUIRED
+									{ printf("\'%s\' requires a value!\n", optional_args_list[y].flag); exit(1); } // error
+
+									else if(optional_args_list[y].value_level == 1)
+									// if a value is not required
+									{
+										append_input_value(argv_copy[x], "TRUE", 1);
+									}
+								}
+								
+
+								// or the item next to it is another flag
+								else if(argv_copy[x+1][0]=='-')
+								{
+									switch (optional_args_list[y].value_level)
+									{
+										case 0:
+											printf("Value cannot be another flag!\n"); exit(1);
+
+										case 1:
+											append_input_value(argv_copy[x], "TRUE", 1);
+											break;
+									}
+								}
+								
+								// if none of the above situations
 								else
 								{
 									//printf("has value %s\n", argv_copy[x+1]); // logging
@@ -73,7 +102,9 @@ void parse_argv()
 							} else {printf("No value required\n"); break;} // if it does not require a value
 						}
 					}
-				} if(found==0){ printf("\'%s\' not existing!\n", argv_copy[x]); exit(1); } // if that flag has not been found
+				}
+				// if that flag has not been found
+				if(found==0){ printf("\'%s\' not existing!\n", argv_copy[x]); exit(1); } 
 			}
 			else
 			{
@@ -95,7 +126,7 @@ void parse_argv()
 	so if any is missing, an error is returned
 	*/
 	{
-		if(strcmp(get_arg_value(mandatory_args_list[indx].flag), "NO_VAL")==0)
+		if(strcmp(get_arg_value(mandatory_args_list[indx].flag), "NO_VAL")==0 && mandatory_args_list[indx].value_level <= 1)
 		{
 			printf("Mandatory value for '%s' missing!\n", mandatory_args_list[indx].flag);
 			exit(1);

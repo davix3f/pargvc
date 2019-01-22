@@ -1,22 +1,22 @@
 #include "pargvc.h"
 
-int add_optional_argument(const char* flag, const char* extended, _Bool has_value, const char* help)
+int add_optional_argument(const char* flag, const char* extended, int value_level, const char* help)
 {
-	optional_cl_argument new_optional_arg = {flag, extended, has_value, help};
+	optional_cl_argument new_optional_arg = {flag, extended, value_level, help};
 
 	append_to_oargs(new_optional_arg);
 
 	return 0;
 }
 
-int add_mandatory_argument(const char* flag, const char* help)
+int add_mandatory_argument(const char* flag, int value_level, const char* help)
 {
-	if(strncmp(flag, "-", 1)==0)
+	if(strncmp(flag, "-", 1)==0 && value_level > 1)
 	{
 		printf("Mandatory arguments cannot not be named with \'--\'or \'-\' at the beginning\n");
 		return 0;
 	}
-	mandatory_cl_argument new_mandatory = {flag, help};
+	mandatory_cl_argument new_mandatory = {flag, value_level, help};
 	append_to_margs(new_mandatory);
 	return 1;
 }
@@ -61,16 +61,15 @@ int append_to_margs(mandatory_cl_argument argument)
 }
 
 
-int append_input_value(const char* flag, const char* input_val, int is_mandatory_val)
+int append_input_value(const char* flag, const char* input_val, int is_accepted_val)
 {
-	//This will assign <input_val> to <flag>, if it requires one
-
+	//This will assign <input_val> to the argument <flag>, if it requires one
 	//printf("flag:%s value:%s\n", flag, input_val);
 	for(int x=0; x<argc_copy; x++)
 	{
 		if(input_args[x].name==NULL)
     	{
-			argv_value arg = {flag, input_val, is_mandatory_val};
+			argv_value arg = {flag, input_val, is_accepted_val};
     		input_args[x] = arg;
     		return 1;
     	}
