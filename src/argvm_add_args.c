@@ -30,11 +30,13 @@ int append_to_oargs(optional_cl_argument argument)
 	argument defined with 'add_optional_argument'
 	to optional_args_list
 	*/
-	for(int x=0; x<optional_args_count; x++)
+	for(int optional_index=0;
+		optional_index < optional_args_count;
+		optional_index++)
 	{
-		if(optional_args_list[x].flag==NULL)
+		if(optional_args_list[optional_index].flag==NULL)
     	{
-    		optional_args_list[x] = argument;
+    		optional_args_list[optional_index] = argument;
     		return 1;
     	}
     }
@@ -49,11 +51,13 @@ int append_to_margs(mandatory_cl_argument argument)
 	argument defined with 'add_mandatory_argument'
 	to mandatory_args_list
 	*/
-	for(int x=0; x<mandatory_args_count; x++)
+	for(int mandatory_index=0;
+		mandatory_index < mandatory_args_count;
+		mandatory_index++)
 	{
-		if(mandatory_args_list[x].flag==NULL)
+		if(mandatory_args_list[mandatory_index].flag==NULL)
     	{
-    		mandatory_args_list[x] = argument;
+    		mandatory_args_list[mandatory_index] = argument;
     		return 1;
     	}
     }
@@ -65,12 +69,12 @@ int append_input_value(const char* flag, const char* ext_flag, const char* input
 {
 	//This will assign <input_val> to the argument <flag>, if it requires one
 	//printf("flag:%s value:%s\n", flag, input_val);
-	for(int x=0; x<argc_copy; x++)
+	for(int argc_index=0; argc_index<argc_copy; argc_index++)
 	{
-		if(input_args[x].name==NULL)
+		if(input_args[argc_index].name==NULL)
     	{
 			argv_value arg = {flag, ext_flag, input_val, is_accepted_val};
-    		input_args[x] = arg;
+    		input_args[argc_index] = arg;
     		return 1;
     	}
     }
@@ -91,11 +95,15 @@ int append_mandatory_value(const char* input_val)
 	checking if the input_args value
 	exists in mandatory args list
 	*/
-	for(int x=0; x<mandatory_args_count; x++)
+	for(int mandatory_index=0;
+		mandatory_index < mandatory_args_count;
+		mandatory_index++)
 	{
-		for(int y=0; y<argc_copy; y++)
+		for(int argc_index=0;
+		 	argc_index < argc_copy;
+			argc_index++)
 		{
-			if((input_args[y].name==mandatory_args_list[x].flag)==1)
+			if((input_args[argc_index].name==mandatory_args_list[mandatory_index].flag)==1)
 			{
 				found = 1;
 				break;
@@ -103,9 +111,9 @@ int append_mandatory_value(const char* input_val)
 		}
 		if(found == 0)
 		{
-			//printf("\nAdding val[%s] to marg[%s]\n", input_val, mandatory_args_list[x].flag);
+			//printf("\nAdding val[%s] to marg[%s]\n", input_val, mandatory_args_list[mandatory_index].flag);
 			// ^ logging
-			append_input_value(mandatory_args_list[x].flag, "/", input_val, 1);
+			append_input_value(mandatory_args_list[mandatory_index].flag, "/", input_val, 1);
 			return 0;
 		}
 
