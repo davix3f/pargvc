@@ -41,7 +41,7 @@ void parse_argv()
 	// check for help_flag
 	if(help_flag() == 1) // if --help or -h does not exists in argv
 	{
-		_Bool found = 0;
+		int found = 0;
 		for(int x=1; x<argc_copy; x++)
 		// for each item in argv
 		{
@@ -72,7 +72,7 @@ void parse_argv()
 									else if(optional_args_list[y].value_level == 1)
 									// if a value is not required
 									{
-										append_input_value(argv_copy[x], "TRUE", 1);
+										append_input_value(argv_copy[x], optional_args_list[y].extended, "TRUE", 1);
 									}
 								}
 								
@@ -86,7 +86,7 @@ void parse_argv()
 											printf("Value cannot be another flag!\n"); exit(1);
 
 										case 1:
-											append_input_value(argv_copy[x], "TRUE", 1);
+											append_input_value(argv_copy[x], optional_args_list[y].extended, "TRUE", 1);
 											break;
 									}
 								}
@@ -95,7 +95,7 @@ void parse_argv()
 								else
 								{
 									//printf("has value %s\n", argv_copy[x+1]); // logging
-									append_input_value(argv_copy[x], argv_copy[x+1], 0); // assign that value
+									append_input_value(argv_copy[x], optional_args_list[y].extended, argv_copy[x+1], 0); // assign that value
 									x++;
 									break;
 								}

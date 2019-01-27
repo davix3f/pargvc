@@ -61,7 +61,7 @@ int append_to_margs(mandatory_cl_argument argument)
 }
 
 
-int append_input_value(const char* flag, const char* input_val, int is_accepted_val)
+int append_input_value(const char* flag, const char* ext_flag, const char* input_val, int is_accepted_val)
 {
 	//This will assign <input_val> to the argument <flag>, if it requires one
 	//printf("flag:%s value:%s\n", flag, input_val);
@@ -69,7 +69,7 @@ int append_input_value(const char* flag, const char* input_val, int is_accepted_
 	{
 		if(input_args[x].name==NULL)
     	{
-			argv_value arg = {flag, input_val, is_accepted_val};
+			argv_value arg = {flag, ext_flag, input_val, is_accepted_val};
     		input_args[x] = arg;
     		return 1;
     	}
@@ -83,7 +83,7 @@ int append_mandatory_value(const char* input_val)
 {
 	/*
 	This is a kind of a wrapper of append_input_value,
-	made to assign values to MANDATORY arguments
+	made to assign values of MANDATORY arguments
 	*/
 
 	int found = 0;
@@ -105,7 +105,7 @@ int append_mandatory_value(const char* input_val)
 		{
 			//printf("\nAdding val[%s] to marg[%s]\n", input_val, mandatory_args_list[x].flag);
 			// ^ logging
-			append_input_value(mandatory_args_list[x].flag, input_val, 1);
+			append_input_value(mandatory_args_list[x].flag, "/", input_val, 1);
 			return 0;
 		}
 

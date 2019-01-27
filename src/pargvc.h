@@ -20,6 +20,7 @@ typedef struct m_clarg
 typedef struct i_arg
 {
 	const char* name;
+	const char* ext_flag;
 	const char* value;
 	int is_accepted;
 } argv_value;
@@ -43,10 +44,12 @@ void argvmanager_end();
 // NOT FOR USER
 // These functions shouldn't be called by the user.
 int append_mandatory_value(const char* input_val); // not for user
-int append_input_value(const char* flag, const char* input_val, int is_accepted); // not for user
+int append_input_value(const char* flag, const char* ext_flag, const char* input_val, int is_accepted); // not for user
 int append_to_oargs(optional_cl_argument argument); // not for user
 int append_to_margs(mandatory_cl_argument argument); //not for user
 int help_flag();
+
+
 
 // Frontends
 // FOR USER

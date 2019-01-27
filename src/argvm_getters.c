@@ -39,7 +39,7 @@ const char* get_arg_value(const char* arg_name)
 	{
 		if(input_args[x].name == NULL){ break; }
 
-		if(strcmp(input_args[x].name, arg_name)==0)
+		if(strcmp(input_args[x].name, arg_name)==0 || strcmp(input_args[x].ext_flag, arg_name)==0)
 		{
 			return(input_args[x].value);
 		}
