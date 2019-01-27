@@ -16,7 +16,6 @@ compile-nowall: $(SOURCES)
 	@$(CC) $(SOURCES)
 	@echo "\n----------------\nCompilation terminated\n----------------\n"
 
-
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< $(PKGCONF)
 
@@ -27,6 +26,19 @@ $(FILENAMES): ./%: ./%.c
 
 compileobj: $(OBJ_FILES)
 	$(CC) $(OBJ_FILES)
+
+compilestat: alltobj
+	@echo -n "\nCompiling as static lib"
+	ar rcsv libpargvc.a $(OBJ_FILES)
+
+mvlib:
+	@echo -n "\nCopying pargvc.h to /usr/include\n"
+	sudo cp pargvc.h /usr/include/pargvc.h
+	@echo "Copying libpargvc.a to /usr/lib\n"
+	sudo cp libpargvc.a /usr/lib/libpargvc.a
+
+createlib: compilestat mvlib clean
+
 
 clean:
 	@rm *.o && echo "All .o files removed"
