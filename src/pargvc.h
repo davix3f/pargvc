@@ -51,7 +51,7 @@ int help_flag();
 
 
 
-// Frontends
+// Callables
 // FOR USER
 // Call those functions to interact with argv values
 
