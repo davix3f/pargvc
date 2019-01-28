@@ -70,9 +70,9 @@ int add_mandatory_argument(const char* flag, int value_level, const char* help);
 void parse_argv();
 
 /* Use that in your program to check if an argument has been given
-e.g "if (check_flag("-a", argv, argc)){do_this;} "
+e.g "if (check_flag("-a")){do_this;} "
 also supports extended flags
-e.g "if(check_flag("--extended-version", argv, argc)){do_that;}"
+e.g "if(check_flag("--extended-version")){do_that;}"
 */
 int check_flag(const char* flag_to_check);
 
