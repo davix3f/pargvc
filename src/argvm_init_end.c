@@ -1,6 +1,6 @@
 #include "pargvc.h"
 
-void argvmanager_init(int number_of_mandatory_args, int number_of_optional_args, char** argv, int argc)
+void pargvc_init(int number_of_mandatory_args, int number_of_optional_args, char** argv, int argc)
 {
 	optional_args_count = number_of_optional_args;
 	mandatory_args_count = number_of_mandatory_args;
@@ -16,7 +16,7 @@ void argvmanager_init(int number_of_mandatory_args, int number_of_optional_args,
 	input_args = (argv_value * )calloc(argc_copy, sizeof(argv_value));
 }
 
-void argvmanager_end()
+void pargvc_end()
 {
 	free(optional_args_list);
 	free(mandatory_args_list);
