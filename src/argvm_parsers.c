@@ -79,7 +79,9 @@ void parse_argv()
 									if(optional_args_list[optional_index].value_level == 0)
 									// if a value is REQUIRED
 									{
-										printf("\'%s\' requires a value!\n", optional_args_list[optional_index].flag);
+										printf("\'%s\'/\'%s\' requires a value!\n",
+											   optional_args_list[optional_index].flag,
+											   optional_args_list[optional_index].extended);
 										exit(1);
 									} // error
 
