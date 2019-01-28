@@ -13,5 +13,16 @@ pargvc supports both 'switch' arguments and value-assignable arguments, so you c
 ## Where is that code?
 I won't merge to master very often, so check dev branch!
 
+## How do I install pargvc?
+1. Clone the repo
+2. Open the **src** directory in the terminal
+3. `make createlib`
+✔️
+
+## How do I use it?
+Include it in your code with `#include <pargvc.h>`
+
+In gcc, add the `-lpargvc` flag when compiling any project that uses pargvc
+
 ## May I get some documentation?
 Sure. Check the wiki!
