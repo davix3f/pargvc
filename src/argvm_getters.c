@@ -55,7 +55,7 @@ const char* get_arg_value(const char* arg_name)
 int check_flag(const char* flag_to_check)
 {
 	for(int optional_index=0;
-		optional_index < optional_args_count-1;
+		optional_index < optional_args_count;
 		optional_index++)
 	{
 		if(strcmp(optional_args_list[optional_index].flag, flag_to_check)==0

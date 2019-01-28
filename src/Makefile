@@ -22,7 +22,7 @@ compile-nowall: $(SOURCES)
 alltobj: $(FILENAMES)
 $(FILENAMES): ./%: ./%.c
 	@echo "Compiling $^ to $@.o"
-	$(CC) -c -o $@.o $^ 
+	$(CC) -c -o $@.o $^
 
 compileobj: $(OBJ_FILES)
 	$(CC) $(OBJ_FILES)
@@ -37,7 +37,7 @@ mvlib:
 	@echo "Copying libpargvc.a to /usr/lib\n"
 	sudo cp libpargvc.a /usr/lib/libpargvc.a
 
-createlib: compilestat mvlib clean
+installib: compilestat mvlib clean
 
 
 clean:
