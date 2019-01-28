@@ -34,10 +34,10 @@ int optional_args_count;
 int mandatory_args_count;
 
 // Call this with before anything else
-void argvmanager_init(int number_of_mandatory_args, int number_of_optional_args, char** argv, int argc);
+void pargvc_init(int number_of_mandatory_args, int number_of_optional_args, char** argv, int argc);
 
 // Call this at the end of the function
-void argvmanager_end();
+void pargvc_end();
 
 
 // Backends
@@ -57,7 +57,7 @@ int help_flag();
 
 int add_optional_argument(const char* flag, const char* extended, int value_level, const char* help);
 int add_mandatory_argument(const char* flag, int value_level, const char* help);
-/* value_level codes 
+/* value_level codes
  0 -> value required
  If the value is missing, an error will come up
 

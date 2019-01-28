@@ -91,7 +91,7 @@ void parse_argv()
 														   "TRUE", 1);
 									}
 								}
-								
+
 
 								// or the item next to it is another flag
 								else if(argv_copy[argc_index+1][0]=='-')
@@ -108,7 +108,7 @@ void parse_argv()
 											break;
 									}
 								}
-								
+
 								// if none of the above situations
 								else
 								{
@@ -128,7 +128,7 @@ void parse_argv()
 					}
 				}
 				// if that flag has not been found
-				if(found==0){ printf("\'%s\' not existing!\n", argv_copy[argc_index]); exit(1); } 
+				if(found==0){ printf("\'%s\' not existing!\n", argv_copy[argc_index]); exit(1); }
 			}
 			else
 			{
