@@ -16,7 +16,7 @@ I won't merge to master very often, so check dev branch!
 ## How do I install pargvc?
 1. Clone the repo
 2. Open the **src** directory in the terminal
-3. `make createlib`
+3. `make installib`
 ✔️
 
 ## How do I use it?
