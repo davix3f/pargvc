@@ -1,6 +1,6 @@
 CC = gcc
-SOURCES = $(wildcard ./*.c)
-HEADERS = $(wildcard ./*.h)
+SOURCES = $(wildcard ./*.c ./*/*.c)
+HEADERS = $(wildcard ./*.h ./*/*.h)
 OBJ_FILES = $(patsubst ./%.c,%.o,$(SOURCES))
 FILENAMES = $(patsubst ./%.c, %, $(SOURCES))
 
@@ -32,13 +32,14 @@ compilestat: alltobj
 	ar rcsv libpargvc.a $(OBJ_FILES)
 
 mvlib:
-	@echo -n "\nCopying pargvc.h to /usr/include\n"
-	sudo cp pargvc.h /usr/include/pargvc.h
+	@echo -n "\nCopying headers to /usr/include/\n"
+	sudo mkdir --parents /usr/include/pargvc_backends/
+	sudo cp -t /usr/include/pargvc_backends/ $(HEADERS)
+	sudo mv /usr/include/pargvc_backends/pargvc.h /usr/include/pargvc.h
 	@echo "Copying libpargvc.a to /usr/lib\n"
-	sudo cp libpargvc.a /usr/lib/libpargvc.a
+	sudo cp --force libpargvc.a /usr/lib/libpargvc.a
 
 installib: compilestat mvlib clean
-
 
 clean:
 	@rm *.o && echo "All .o files removed"
