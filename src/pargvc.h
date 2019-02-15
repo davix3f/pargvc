@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define VAL_REQ 0
+#define VAL_OPT 1
+#define VAL_NOT 2
+
 typedef struct o_clarg
 {
 	const char* flag;
