@@ -13,7 +13,6 @@ typedef struct o_clarg
 typedef struct m_clarg
 {
 	const char* flag;
-	int  value_level;
 	const char* help;
 } mandatory_cl_argument;
 
@@ -34,7 +33,7 @@ int optional_args_count;
 int mandatory_args_count;
 
 // Call this with before anything else
-void pargvc_init(int number_of_mandatory_args, int number_of_optional_args, char** argv, int argc);
+void pargvc_init(char** argv, int argc);
 
 // Call this at the end of the function
 void pargvc_end();
@@ -56,7 +55,7 @@ int help_flag();
 // Call those functions to interact with argv values
 
 int add_optional_argument(const char* flag, const char* extended, int value_level, const char* help);
-int add_mandatory_argument(const char* flag, int value_level, const char* help);
+int add_mandatory_argument(const char* flag, const char* help);
 /* value_level codes
  0 -> value required
  If the value is missing, an error will come up
