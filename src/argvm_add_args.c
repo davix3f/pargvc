@@ -16,6 +16,8 @@ int add_switch(const char* flag, const char* extended, const char* help)
 {
 	add_optional_argument(flag, extended, 2, help);
 	return 0;
+}
+
 int add_mandatory_argument(const char* flag, const char* help)
 {
 	if(strncmp(flag, "-", 1)==0)

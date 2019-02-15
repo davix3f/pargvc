@@ -56,6 +56,7 @@ int help_flag();
 
 int add_optional_argument(const char* flag, const char* extended, int value_level, const char* help);
 int add_mandatory_argument(const char* flag, const char* help);
+int add_switch(const char* flag, const char* extended, const char* help);
 /* value_level codes
  0 -> value required
  If the value is missing, an error will come up
@@ -64,6 +65,12 @@ int add_mandatory_argument(const char* flag, const char* help);
  If given, the value is stored
  If not, the value assigned to
  that argument will be "TRUE"
+
+ 2 -> value not is_accepted
+ This kind of optional arguments do
+ not accept values and act like switches.
+ It's recommended to use "add_switch" instead
+ of using this value_level
 */
 
 void parse_argv();
