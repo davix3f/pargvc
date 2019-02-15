@@ -1,27 +1,4 @@
-#include "pargvc.h"
-
-int add_optional_argument(const char* flag, const char* extended, int value_level, const char* help)
-{
-	optional_cl_argument new_optional_arg = {flag, extended, value_level, help};
-
-	append_to_oargs(new_optional_arg);
-
-	return 0;
-}
-
-int add_mandatory_argument(const char* flag, int value_level, const char* help)
-{
-	if(strncmp(flag, "-", 1)==0 && value_level > 1)
-	{
-		printf("Mandatory arguments cannot not be named with \'--\'or \'-\' at the beginning\n");
-		return 0;
-	}
-	mandatory_cl_argument new_mandatory = {flag, value_level, help};
-	append_to_margs(new_mandatory);
-	return 1;
-}
-
-
+#include "pargvc_backends.h"
 
 int append_to_oargs(optional_cl_argument argument)
 {
@@ -80,7 +57,6 @@ int append_input_value(const char* flag, const char* ext_flag, const char* input
     }
 	return 0;
 }
-
 
 
 int append_mandatory_value(const char* input_val)

@@ -94,7 +94,6 @@ void parse_argv()
 									}
 								}
 
-
 								// or the item next to it is another flag
 								else if(argv_copy[argc_index+1][0]=='-')
 								{
@@ -107,6 +106,10 @@ void parse_argv()
 											append_input_value(argv_copy[argc_index],
 															   optional_args_list[optional_index].extended,
 															   "TRUE", 1);
+										case 2:
+										append_input_value(argv_copy[argc_index],
+														   optional_args_list[optional_index].extended,
+														   "TRUE", 0);
 											break;
 									}
 								}
@@ -121,11 +124,13 @@ void parse_argv()
 									argc_index++;
 									break;
 								}
-							} else {
+							}
+							else
+							{
 								// if it does not require a value
 								printf("No value required\n");
 								break;
-							  }
+							}
 						}
 					}
 				}
@@ -154,8 +159,7 @@ void parse_argv()
 	so if any is missing, an error is returned
 	*/
 	{
-		if(strcmp(get_arg_value(mandatory_args_list[mandatory_index].flag), "NO_VAL")==0
-		   && mandatory_args_list[mandatory_index].value_level <= 1)
+		if(strcmp(get_arg_value(mandatory_args_list[mandatory_index].flag), "NO_VAL")==0)
 		{
 			printf("Mandatory value for '%s' missing!\n", mandatory_args_list[mandatory_index].flag);
 			exit(1);
