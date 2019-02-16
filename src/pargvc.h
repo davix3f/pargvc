@@ -31,16 +31,21 @@ int add_switch(const char* flag, const char* extended, const char* help);
 */
 
 void parse_argv();
-
-/* Use that in your program to check if an argument has been given
-e.g "if (check_flag("-a")){do_this;} "
-also supports extended flags
-e.g "if(check_flag("--extended-version")){do_that;}"
+/*
+ Call this function after declaring
+ all the cli arguments
 */
+
 int check_flag(const char* flag_to_check);
+/*
+ Use this function to check if an argument has been given
+ e.g "if (check_flag("-a")){do_this;} "
+ also supports extended flags
+ e.g "if(check_flag("--extended-version")){do_that;}"
+*/
 
-//print all args
 void get_all_args();
+//print all args
 
-// get the value of a flag
 const char* get_arg_value(const char* arg_name);
+// get the value of a flag

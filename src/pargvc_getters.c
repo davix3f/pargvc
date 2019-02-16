@@ -14,17 +14,24 @@ void get_all_args()
 		{
 			if(mandatory_args_list[index].flag!=NULL)
 			{
-				printf("[%i] #%i (Flag: %s)\n", index, index+1, mandatory_args_list[index].flag);
+				printf("[%i] #%i (Flag: %s)\n",
+						index,
+						index+1,
+						mandatory_args_list[index].flag);
 			}
 		}
 	}
 
 	printf("Optional arguments:\n");
 	if(optional_args_count==0)
-		{  printf("None\n");  }
+	{
+		printf("None\n");
+	}
 	else
 	{
-		for(int index=0; index<optional_args_count; index++)
+		for(int index=0;
+			index<optional_args_count;
+			index++)
 		{
 			if(optional_args_list[index].flag!=NULL)
 			{
@@ -39,7 +46,9 @@ void get_all_args()
 
 const char* get_arg_value(const char* arg_name)
 {
-	for(int argc_index=0; argc_index<argc_copy; argc_index++)
+	for(int argc_index=0;
+		argc_index<argc_copy;
+		argc_index++)
 	{
 		if(input_args[argc_index].name == NULL){ break; }
 

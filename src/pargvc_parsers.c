@@ -57,7 +57,7 @@ void parse_argv()
 			// if the item starts with '-', it should be a flag
 			{
 				found = 0;
-				//printf("Parsing %s: ", argv_copy[argc_index]); // logging
+				//printf("Parsing %s: ", argv_copy[argc_index]); //logging
 				for(int optional_index=0;
 					optional_index < optional_args_count;
 					optional_index++)
@@ -107,9 +107,9 @@ void parse_argv()
 															   optional_args_list[optional_index].extended,
 															   "TRUE", 1);
 										case 2:
-										append_input_value(argv_copy[argc_index],
-														   optional_args_list[optional_index].extended,
-														   "TRUE", 0);
+											append_input_value(argv_copy[argc_index],
+														   	   optional_args_list[optional_index].extended,
+														       "TRUE", 0);
 											break;
 									}
 								}
@@ -128,14 +128,18 @@ void parse_argv()
 							else
 							{
 								// if it does not require a value
-								printf("No value required\n");
+								//printf("No value required\n"); //logging
 								break;
 							}
 						}
 					}
 				}
 				// if that flag has not been found
-				if(found==0){ printf("\'%s\' not existing!\n", argv_copy[argc_index]); exit(1); }
+				if(found==0)
+				{
+					printf("\'%s\' not existing!\n", argv_copy[argc_index]);
+					exit(1);
+				}
 			}
 			else
 			{
