@@ -1,7 +1,7 @@
 CC = gcc
 SOURCES = $(wildcard ./*.c ./*/*.c)
 HEADERS = $(wildcard ./*.h ./*/*.h)
-OBJ_FILES = $(patsubst ./%.c,%.o,$(SOURCES))
+OBJ_FILES = $(patsubst ./%.c, %.o, $(SOURCES))
 FILENAMES = $(patsubst ./%.c, %, $(SOURCES))
 
 compilesrc: $(SOURCES)
@@ -20,7 +20,7 @@ compile-nowall: $(SOURCES)
 	$(CC) $(CFLAGS) -c $< $(PKGCONF)
 
 alltobj: $(FILENAMES)
-$(FILENAMES): ./%: ./%.c
+	$(FILENAMES): ./%: ./%.c
 	@echo "Compiling $^ to $@.o"
 	$(CC) -c -o $@.o $^
 
