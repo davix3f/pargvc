@@ -51,4 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-src/main\.c
+# customs
+src/pvctest*
+*.vscode
