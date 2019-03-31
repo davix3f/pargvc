@@ -1,7 +1,7 @@
 #include "pargvc.h"
 
-void ignore_wrong_flag(int tf_state_value)
-{ ignore_state = tf_state_value; }
+void ignore_wrong_flag()
+{ wflag_ignore_state = 1; }
 
 void set_wrong_flag_msg(char* wflag_msg)
 { assign_help_string(wflag_msg, wrong_flag_msg_p); }

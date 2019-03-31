@@ -50,7 +50,11 @@ void get_all_args();
 const char* get_arg_value(const char* arg_name);
 // get the value of a flag
 
-void ignore_wrong_flag(int tf_state_value);
+//setters
+
+//ignore unknown arguments in argv
+void ignore_wrong_flag();
+
 //set output when an unknown argument is found
 void set_wrong_flag_msg(char* wflag_msg);
 
