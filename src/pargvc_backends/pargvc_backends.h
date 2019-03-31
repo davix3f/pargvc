@@ -10,7 +10,7 @@ int argc_copy;
 int optional_args_count;
 int mandatory_args_count;
 
-int ignore_state;
+int wflag_ignore_state;
 
 char* wrong_flag_msg;
 char** wrong_flag_msg_p;

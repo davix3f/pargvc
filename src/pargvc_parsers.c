@@ -58,13 +58,16 @@ void parse_argv()
 									switch (optional_args_list[optional_index].value_level)
 									{
 										case 0:
+										// VAL_REQ
 											printf("Value cannot be another flag!\n"); exit(1);
 
 										case 1:
+										// VAL_OPT
 											append_input_value(argv_copy[argc_index],
 															   optional_args_list[optional_index].extended,
 															   "TRUE", 1);
 										case 2:
+										// VAL_NOT
 											append_input_value(argv_copy[argc_index],
 														   	   optional_args_list[optional_index].extended,
 														       "TRUE", 0);
@@ -86,7 +89,6 @@ void parse_argv()
 							else
 							{
 								// if it does not require a value
-								//printf("No value required\n"); //logging
 								break;
 							}
 						}
@@ -95,11 +97,11 @@ void parse_argv()
 				// if that flag has not been found
 				if(found==0)
 				{
-					if(!ignore_state)
+					if(!wflag_ignore_state)
 					{
 						if(wrong_flag_msg == NULL)
 						{
-							printf("\'%s\' not defined. Aborting.\n", argv_copy[argc_index]);
+							printf("\'%s\' undefined. Aborting.\n", argv_copy[argc_index]);
 						} else { printf("%s\n", wrong_flag_msg); }
 						exit(1);
 					}
@@ -111,7 +113,7 @@ void parse_argv()
 				{
 					append_mandatory_value(argv_copy[argc_index]);
 				    /*
-				    if the argv item is not a flag, it is added to
+				    if the argv item is not a flag, it's assigned to
 				    the first not-assigned positional argument.
 				    */
 				} else { printf("Value \'%s\' ignored\n", argv_copy[argc_index]); }

@@ -51,7 +51,9 @@ const char* get_arg_value(const char* arg_name);
 // get the value of a flag
 
 void ignore_wrong_flag(int tf_state_value);
+//set output when an unknown argument is found
 void set_wrong_flag_msg(char* wflag_msg);
+
 void set_description(char* description_arg);
 void set_author(char* author_arg);
 void set_website(char* usage_arg);
