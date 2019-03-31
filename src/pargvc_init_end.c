@@ -14,6 +14,26 @@ void pargvc_init(char** argv, int argc)
 	argc_copy = argc;
 
 	input_args = (argv_value * )calloc(argc_copy, sizeof(argv_value));
+
+	ignore_state = 0;
+
+	wrong_flag_msg = NULL;
+	wrong_flag_msg_p = &wrong_flag_msg;
+
+	help_description = NULL;
+	help_description_p = &help_description;
+
+	help_author = NULL;
+	help_author_p = &help_author;
+
+	help_website = NULL;
+	help_website_p = &help_website;
+
+	help_license = NULL;
+	help_license_p = &help_license;
+
+	help_usage = NULL;
+	help_usage_p = &help_usage;
 }
 
 void pargvc_end()
@@ -21,4 +41,10 @@ void pargvc_end()
 	free(optional_args_list);
 	free(mandatory_args_list);
 	free(input_args);
+	free(wrong_flag_msg);
+	free(help_description);
+	free(help_author);
+	free(help_website);
+	free(help_license);
+	free(help_usage);
 }

@@ -49,3 +49,11 @@ void get_all_args();
 
 const char* get_arg_value(const char* arg_name);
 // get the value of a flag
+
+void ignore_wrong_flag(int tf_state_value);
+void set_wrong_flag_msg(char* wflag_msg);
+void set_description(char* description_arg);
+void set_author(char* author_arg);
+void set_website(char* usage_arg);
+void set_license(char *license_arg);
+void set_usage(char* usage_arg);
