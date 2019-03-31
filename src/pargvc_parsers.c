@@ -95,8 +95,14 @@ void parse_argv()
 				// if that flag has not been found
 				if(found==0)
 				{
-					printf("\'%s\' not existing!\n", argv_copy[argc_index]);
-					exit(1);
+					if(!ignore_state)
+					{
+						if(wrong_flag_msg == NULL)
+						{
+							printf("\'%s\' not defined. Aborting.\n", argv_copy[argc_index]);
+						} else { printf("%s\n", wrong_flag_msg); }
+						exit(1);
+					}
 				}
 			}
 			else
