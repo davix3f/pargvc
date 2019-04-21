@@ -19,7 +19,7 @@ int assign_help_string(char* source, char** destination)
  		return 0;
  	}
 
-	*destination = malloc((strlen(source)+1) * sizeof(char));
+	*destination = (char *)malloc((strlen(source)+1) * sizeof(char));
 	strcpy(*destination, source);
 
 	if(!strcmp(source, *destination))

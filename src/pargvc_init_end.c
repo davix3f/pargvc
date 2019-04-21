@@ -15,7 +15,7 @@ void pargvc_init(char** argv, int argc)
 
 	input_args = (argv_value * )calloc(argc_copy, sizeof(argv_value));
 
-	ignore_state = 0;
+	wflag_ignore_state = 0;
 
 	wrong_flag_msg = NULL;
 	wrong_flag_msg_p = &wrong_flag_msg;
