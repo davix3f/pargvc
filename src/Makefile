@@ -28,18 +28,20 @@ compileobj: $(OBJ_FILES)
 	$(CC) $(OBJ_FILES)
 
 compilestat: alltobj
-	@echo -n "\nCompiling as static lib"
+	@echo -n "\n!-- Compiling as static lib"
 	ar rcsv libpargvc.a $(OBJ_FILES)
 
 mvlib:
-	@echo -n "\nCopying headers to /usr/include/\n"
+	@echo -n "\n!--Copying headers to /usr/include/\n"
 	sudo mkdir --parents /usr/include/pargvc_backends/
 	sudo cp -t /usr/include/pargvc_backends/ $(HEADERS)
 	sudo mv /usr/include/pargvc_backends/pargvc.h /usr/include/pargvc.h
-	@echo "Copying libpargvc.a to /usr/lib\n"
+	@echo "!-- Copying libpargvc.a to /usr/lib\n"
 	sudo cp --force libpargvc.a /usr/lib/libpargvc.a
 
 installib: compilestat mvlib clean
 
 clean:
-	@rm *.o && echo "All .o files removed"
+	@echo "Removing compilation files"
+	find . -name "*.o" -delete
+	rm *.a
