@@ -17,10 +17,10 @@ compile-nowall: $(SOURCES)
 	@echo "\n----------------\nCompilation terminated\n----------------\n"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< $(PKGCONF)
+	$(CC) $(CFLAGS) -c $<
 
 alltobj: $(FILENAMES)
-	$(FILENAMES): ./%: ./%.c
+$(FILENAMES): ./%: ./%.c
 	@echo "Compiling $^ to $@.o"
 	$(CC) -c -o $@.o $^
 
